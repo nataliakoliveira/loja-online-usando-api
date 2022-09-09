@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Categoria from './Categoria';
 
 class Home extends React.Component {
   render() {
@@ -9,7 +10,7 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
-
+        <Categoria />
       </div>
     );
   }

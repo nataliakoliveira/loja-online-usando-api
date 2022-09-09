@@ -12,6 +12,7 @@ class App extends React.Component {
           <Route path="/carrinho" component={ Carrinho } />
         </Switch>
       </BrowserRouter>
+
     );
   }
 }
