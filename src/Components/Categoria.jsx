@@ -23,6 +23,7 @@ class Categoria extends React.Component {
       <div>
         {listaCategoria.map((elem) => (
           <label
+            className="category"
             key={ elem.id }
             data-testid="category"
             htmlFor="category"
