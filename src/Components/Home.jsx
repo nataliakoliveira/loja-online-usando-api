@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Categoria from './Categoria';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import Search from './Search';
 
 class Home extends React.Component {
   state = {
@@ -11,6 +12,7 @@ class Home extends React.Component {
 
   handleChange = ({ target }) => {
     const { value } = target;
+    console.log(value);
     this.setState({
       nome: value,
     });
@@ -31,27 +33,14 @@ class Home extends React.Component {
   };
 
   render() {
-    const { nome, lista } = this.state;
+    const { lista, nome } = this.state;
     return (
       <div>
-        <input
-          type="text"
-          data-testid="query-input"
-          onChange={ this.handleChange }
-          value={ nome }
+        <Search
+          handleChange={ this.handleChange }
+          handleClick={ this.handleClick }
+          nome={ nome }
         />
-
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.handleClick }
-        >
-          buscar
-        </button>
-
-        <h2 data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </h2>
         <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
         <Categoria />
         {lista
