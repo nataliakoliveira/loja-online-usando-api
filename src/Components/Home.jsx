@@ -48,6 +48,7 @@ class Home extends React.Component {
               data-testid="product"
               key={ elem.id }
             >
+              {/*  */}
               <p>
                 Nome:
                 { elem.title }
