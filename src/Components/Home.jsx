@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Categoria from './Categoria';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductById, getProductsFromCategoryAndQuery } from '../services/api';
 import Search from './Search';
 
 class Home extends React.Component {
@@ -31,6 +31,11 @@ class Home extends React.Component {
     }
   };
 
+  handleDetails = async ({ target }) => {
+    const apiProductById = await getProductById(target.id);
+    console.log(apiProductById);
+  };
+
   render() {
     const { nome, lista } = this.state;
     return (
@@ -48,7 +53,7 @@ class Home extends React.Component {
               data-testid="product"
               key={ elem.id }
             >
-              {/*  */}
+
               <p>
                 Nome:
                 { elem.title }
@@ -59,6 +64,14 @@ class Home extends React.Component {
                 Preço:
                 { elem.price}
               </p>
+              <Link
+                data-testid="product-detail-link"
+                to="/detalhes"
+                id={ elem.id }
+                onClick={ (e) => this.handleDetails(e) }
+              >
+                Detalhes
+              </Link>
             </div>
           ))) : <p>Nenhum produto foi encontrado</p> }
       </div>
