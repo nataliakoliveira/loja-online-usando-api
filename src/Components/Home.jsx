@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Categoria from './Categoria';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Search from './Search';
+import ProductCard from './ProductCard';
 
 class Home extends React.Component {
   state = {
@@ -20,7 +21,8 @@ class Home extends React.Component {
 
   handleClick = async () => {
     const { nome } = this.state;
-    const apiProdutos = await getProductsFromCategoryAndQuery('', nome);
+    const apiProdutos = await getProductsFromCategoryAndQuery(nome, '');
+    console.log(apiProdutos);
     if (nome.length < 1) {
       this.setState({
         lista: false,
@@ -49,16 +51,12 @@ class Home extends React.Component {
               data-testid="product"
               key={ elem.id }
             >
-              <p>
-                Nome:
-                { elem.title }
-              </p>
-              Imagem:
-              <img src={ elem.thumbnail } alt={ elem.title } />
-              <p>
-                Preço:
-                { elem.price}
-              </p>
+              <ProductCard
+                nomeProduto={ elem.title }
+                img={ elem.thumbnail }
+                preco={ elem.price }
+              />
+
             </div>
           ))) : <p>Nenhum produto foi encontrado</p> }
       </div>
