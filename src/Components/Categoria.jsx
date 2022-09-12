@@ -1,9 +1,11 @@
 import React from 'react';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import ProductCard from './ProductCard';
 
 class Categoria extends React.Component {
   state = {
     listaCategoria: [],
+    lista: [],
   };
 
   componentDidMount() {
@@ -17,24 +19,46 @@ class Categoria extends React.Component {
     });
   };
 
+  handleSelectRadio = async ({ target }) => {
+    const apiCategoria = await getProductsFromCategoryAndQuery(target.id, '');
+    this.setState({
+      lista: apiCategoria.results,
+    });
+  };
+
   render() {
-    const { listaCategoria } = this.state;
+    const { listaCategoria, lista } = this.state;
     return (
       <div>
-        {listaCategoria.map((elem) => (
+        {lista !== 0 && listaCategoria.map((elem) => (
           <label
             className="category"
             key={ elem.id }
-            data-testid="category"
             htmlFor="category"
           >
-            <input
-              type="radio"
+            <button
+              id={ elem.id }
+              data-testid="category"
               name="category"
-            />
-            {elem.name}
-
+              onClick={ this.handleSelectRadio }
+              type="button"
+              value={ elem.name }
+            >
+              {elem.name}
+            </button>
           </label>
+        ))}
+
+        {lista.map((elem) => (
+          <div
+            key={ elem.id }
+          >
+            <ProductCard
+              nomeProduto={ elem.title }
+              img={ elem.thumbnail }
+              preco={ elem.price }
+            />
+          </div>
         ))}
 
       </div>
