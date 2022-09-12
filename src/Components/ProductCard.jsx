@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export class ProductCard extends Component {
+class ProductCard extends Component {
   render() {
     const { nomeProduto, img, preco } = this.props;
     return (
-      <div>
+      <div data-testid="product">
         <p>
           Nome:
           { nomeProduto }

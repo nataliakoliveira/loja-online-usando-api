@@ -20,8 +20,7 @@ class Categoria extends React.Component {
   };
 
   handleSelectRadio = async ({ target }) => {
-    const apiCategoria = await getProductsFromCategoryAndQuery('', target.value);
-    console.log(apiCategoria);
+    const apiCategoria = await getProductsFromCategoryAndQuery(target.id, '');
     this.setState({
       lista: apiCategoria.results,
     });
@@ -31,27 +30,27 @@ class Categoria extends React.Component {
     const { listaCategoria, lista } = this.state;
     return (
       <div>
-        {listaCategoria.map((elem) => (
+        {lista !== 0 && listaCategoria.map((elem) => (
           <label
             className="category"
             key={ elem.id }
-            data-testid="category"
             htmlFor="category"
           >
-            <input
-              type="radio"
+            <button
+              id={ elem.id }
+              data-testid="category"
               name="category"
-              onChange={ this.handleSelectRadio }
+              onClick={ this.handleSelectRadio }
+              type="button"
               value={ elem.name }
-            />
-            {elem.name}
-
+            >
+              {elem.name}
+            </button>
           </label>
         ))}
 
-        {lista.length !== 0 && lista.map((elem) => (
+        {lista.map((elem) => (
           <div
-            data-testid="product"
             key={ elem.id }
           >
             <ProductCard
