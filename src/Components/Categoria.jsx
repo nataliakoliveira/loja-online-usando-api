@@ -65,6 +65,14 @@ class Categoria extends React.Component {
             >
               Detalhes
             </Link>
+            <br />
+            <br />
+            <button
+              type="button"
+              data-testid="product-add-to-cart"
+            >
+              Adicionar ao Carrinho
+            </button>
           </div>
         ))}
 

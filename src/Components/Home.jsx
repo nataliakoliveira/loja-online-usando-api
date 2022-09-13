@@ -8,6 +8,7 @@ class Home extends React.Component {
   state = {
     nome: '',
     lista: [],
+    listaCarrinho: [],
   };
 
   handleChange = ({ target }) => {
@@ -32,7 +33,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const { nome, lista } = this.state;
+    const { nome, lista, listaCarrinho } = this.state;
     return (
       <div>
         <Search
@@ -65,6 +66,14 @@ class Home extends React.Component {
               >
                 Detalhes
               </Link>
+              <br />
+              <br />
+              <button
+                type="button"
+                data-testid="product-add-to-cart"
+              >
+                Adicionar ao Carrinho
+              </button>
             </div>
           ))) : <p>Nenhum produto foi encontrado</p> }
       </div>
