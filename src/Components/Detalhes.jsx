@@ -49,7 +49,6 @@ class Detalhes extends Component {
 }
 
 Detalhes.propTypes = {
-  nomeProduto: PropTypes.string,
   img: PropTypes.string,
   preco: PropTypes.number,
 }.isRequired;
