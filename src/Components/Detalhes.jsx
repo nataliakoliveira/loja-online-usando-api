@@ -1,36 +1,49 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { getProductById } from '../services/api';
 
 class Detalhes extends Component {
+  state = {
+    /* atributos: [], */
+    img: '',
+    price: 0,
+    nome: '',
+  };
+
+  async componentDidMount() {
+    const { match } = this.props;
+    console.log(this.props);
+    const { id } = match.params;
+    const requisicao = await getProductById(id);
+    this.setState({
+      /* atributos: requisicao.attributes, */
+      img: requisicao.thumbnail,
+      price: requisicao.price,
+      nome: requisicao.title,
+    });
+  }
+
   render() {
-    const { nomeProduto, preco, teste } = this.props;
+    const { /* atributos, */ img, price, nome } = this.state;
     return (
       <div>
         <p data-testid="product-detail-name">
-          Nome:
-          { nomeProduto }
+          {nome}
         </p>
-        Imagem:
         <img
-          src={ teste.thumbnail }
-          alt={ teste.name }
+          src={ img }
+          alt={ nome }
           data-testid="product-detail-image"
         />
         <p data-testid="product-detail-price">
-          Preço:
-          { preco }
+          {price}
         </p>
         <Link
           data-testid="shopping-cart-button"
           to="/carrinho"
         >
-          <button
-            data-testid="shopping-cart-button"
-            type="button"
-          >
-            Carrinho
-          </button>
+          Carrinho
         </Link>
       </div>
     );

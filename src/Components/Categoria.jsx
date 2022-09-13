@@ -59,7 +59,12 @@ class Categoria extends React.Component {
               img={ elem.thumbnail }
               preco={ elem.price }
             />
-            <Link data-testid="product-detail-link" to="/detalhes">Detalhes</Link>
+            <Link
+              data-testid="product-detail-link"
+              to={ `/detalhes/${elem.id}` }
+            >
+              Detalhes
+            </Link>
           </div>
         ))}
 

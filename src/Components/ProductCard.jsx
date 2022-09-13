@@ -6,7 +6,7 @@ class ProductCard extends Component {
     const { nomeProduto, img, preco } = this.props;
     return (
       <div data-testid="product">
-        <p data-testid="product-detail-link">
+        <p>
           Nome:
           { nomeProduto }
         </p>

@@ -11,7 +11,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={ Home } />
           <Route path="/carrinho" component={ Carrinho } />
-          <Route path="/detalhes" component={ Detalhes } />
+          <Route path="/detalhes/:id" render={ (props) => <Detalhes { ...props } /> } />
         </Switch>
       </BrowserRouter>
 
