@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from './ProductCard';
 
@@ -58,6 +59,12 @@ class Categoria extends React.Component {
               img={ elem.thumbnail }
               preco={ elem.price }
             />
+            <Link
+              data-testid="product-detail-link"
+              to={ `/detalhes/${elem.id}` }
+            >
+              Detalhes
+            </Link>
           </div>
         ))}
 
