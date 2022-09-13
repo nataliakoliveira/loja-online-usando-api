@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Categoria from './Categoria';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery, setItem } from '../services/api';
 import Search from './Search';
 
 class Home extends React.Component {
   state = {
     nome: '',
     lista: [],
+    quant: 0,
     listaCarrinho: [],
   };
 
@@ -32,8 +33,30 @@ class Home extends React.Component {
     }
   };
 
+  addCart = (elem) => {
+    const { title, thumbnail, price, id } = elem;
+    const { listaCarrinho } = this.state;
+    // const produtos = getItem('cart');
+    // console.log(produtos.indexOf(elem.id));
+    const product = {
+      title,
+      thumbnail,
+      price,
+      id,
+      qt: 1,
+    };
+    const quant = listaCarrinho.push(product);
+
+    this.setState({
+      listaCarrinho,
+      quant,
+    });
+
+    setItem('cart', listaCarrinho);
+  };
+
   render() {
-    const { nome, lista, listaCarrinho } = this.state;
+    const { nome, lista, quant } = this.state;
     return (
       <div>
         <Search
@@ -41,7 +64,9 @@ class Home extends React.Component {
           handleClick={ this.handleClick }
           nome={ nome }
         />
-        <Link data-testid="shopping-cart-button" to="/carrinho">Carrinho</Link>
+        <Link data-testid="shopping-cart-button" to="/carrinho">
+          {`Carrinho ${quant}`}
+        </Link>
         <Categoria />
         {lista
           ? (lista.map((elem) => (
@@ -71,6 +96,7 @@ class Home extends React.Component {
               <button
                 type="button"
                 data-testid="product-add-to-cart"
+                onClick={ () => this.addCart(elem) }
               >
                 Adicionar ao Carrinho
               </button>

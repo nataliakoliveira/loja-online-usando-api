@@ -13,11 +13,9 @@ class Detalhes extends Component {
 
   async componentDidMount() {
     const { match } = this.props;
-    console.log(this.props);
     const { id } = match.params;
     const requisicao = await getProductById(id);
     this.setState({
-      /* atributos: requisicao.attributes, */
       img: requisicao.thumbnail,
       price: requisicao.price,
       nome: requisicao.title,
