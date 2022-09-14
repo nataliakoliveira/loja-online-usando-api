@@ -17,25 +17,24 @@ class Carrinho extends React.Component {
     const { carrinho } = this.state;
     return (
       <div>
-        {Object.values(carrinho).map(({ item, quantity }) => (
-          <div
-            key={ item.id }
-          >
-            <p data-testid="shopping-cart-product-name">
-              { item.title }
-            </p>
-            <img src={ item.thumbnail } alt={ item.title } />
-            <p>
-              { item.price}
-            </p>
-            <p data-testid="shopping-cart-product-quantity">
-              {`Quantidade: ${quantity}`}
-            </p>
-          </div>
-        ))}
-        { carrinho.length === 0
+        { Object.keys(carrinho).length === 0
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-          : null}
+          : (Object.values(carrinho).map(({ item, quantity }) => (
+            <div
+              key={ item.id }
+            >
+              <p data-testid="shopping-cart-product-name">
+                { item.title }
+              </p>
+              <img src={ item.thumbnail } alt={ item.title } />
+              <p>
+                { item.price}
+              </p>
+              <p data-testid="shopping-cart-product-quantity">
+                {quantity}
+              </p>
+            </div>
+          )))}
       </div>
 
     );
