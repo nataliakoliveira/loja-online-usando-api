@@ -80,6 +80,7 @@ class Detalhes extends Component {
     );
   }
 }
+// teste
 
 Detalhes.propTypes = {
   img: PropTypes.string,
