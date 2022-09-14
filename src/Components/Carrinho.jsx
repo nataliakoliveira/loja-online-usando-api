@@ -33,7 +33,7 @@ class Carrinho extends React.Component {
             </p>
           </div>
         ))}
-        { carrinho.size === 0
+        { carrinho.length === 0
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           : null}
       </div>
