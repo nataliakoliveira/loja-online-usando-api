@@ -9,7 +9,7 @@ class Home extends React.Component {
     nome: '',
     lista: [],
     quant: 0,
-    listaCarrinho: [],
+    carrinho: {},
   };
 
   handleChange = ({ target }) => {
@@ -35,24 +35,23 @@ class Home extends React.Component {
 
   addCart = (elem) => {
     const { title, thumbnail, price, id } = elem;
-    const { listaCarrinho } = this.state;
-    // const produtos = getItem('cart');
-    // console.log(produtos.indexOf(elem.id));
+    const { carrinho } = this.state;
     const product = {
       title,
       thumbnail,
       price,
       id,
-      qt: 1,
     };
-    const quant = listaCarrinho.push(product);
 
-    this.setState({
-      listaCarrinho,
-      quant,
-    });
+    if (!carrinho[product.id]) {
+      carrinho[product.id] = { item: product, quantity: 1 };
+    }
+    console.log(carrinho);
+    this.setState(() => ({
+      carrinho,
+    }));
 
-    setItem('cart', listaCarrinho);
+    setItem('cart', carrinho);
   };
 
   render() {
@@ -67,7 +66,9 @@ class Home extends React.Component {
         <Link data-testid="shopping-cart-button" to="/carrinho">
           {`Carrinho ${quant}`}
         </Link>
-        <Categoria />
+        <Categoria
+          addCart={ this.addCart }
+        />
         {lista
           ? (lista.map((elem) => (
             <div
