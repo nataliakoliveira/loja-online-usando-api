@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery, setItem } from '../services/api';
 import ProductCard from './ProductCard';
 
 class Categoria extends React.Component {
   state = {
     listaCategoria: [],
     lista: [],
+    listaCarrinho: [],
+    quant: 0,
   };
 
   componentDidMount() {
@@ -27,10 +29,33 @@ class Categoria extends React.Component {
     });
   };
 
+  addCart = (elem) => {
+    const { title, thumbnail, price, id } = elem;
+    const { listaCarrinho } = this.state;
+    // const produtos = getItem('cart');
+    // console.log(produtos.indexOf(elem.id));
+    const product = {
+      title,
+      thumbnail,
+      price,
+      id,
+      qt: 1,
+    };
+    const quant = listaCarrinho.push(product);
+
+    this.setState({
+      listaCarrinho,
+      quant,
+    });
+
+    setItem('cart', listaCarrinho);
+  };
+
   render() {
-    const { listaCategoria, lista } = this.state;
+    const { listaCategoria, lista, quant } = this.state;
     return (
       <div>
+        <p>{`Carrinho Categoria ${quant}`}</p>
         {lista !== 0 && listaCategoria.map((elem) => (
           <label
             className="category"
@@ -65,9 +90,17 @@ class Categoria extends React.Component {
             >
               Detalhes
             </Link>
+            <br />
+            <br />
+            <button
+              type="button"
+              data-testid="product-add-to-cart"
+              onClick={ () => this.addCart(elem) }
+            >
+              Adicionar ao Carrinho
+            </button>
           </div>
         ))}
-
       </div>
     );
   }
