@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getProductById } from '../services/api';
+import { getProductById, setItem, getItem } from '../services/api';
 
 class Detalhes extends Component {
   state = {
@@ -9,21 +9,45 @@ class Detalhes extends Component {
     img: '',
     price: 0,
     nome: '',
+    id: '',
+    carrinho: {},
   };
 
   async componentDidMount() {
     const { match } = this.props;
     const { id } = match.params;
     const requisicao = await getProductById(id);
+    const produtos = getItem('cart');
     this.setState({
       img: requisicao.thumbnail,
       price: requisicao.price,
       nome: requisicao.title,
+      id,
+      carrinho: produtos,
     });
   }
 
+  addCart = (title, thumbnail, price, id) => {
+    const { carrinho } = this.state;
+    const product = {
+      title,
+      thumbnail,
+      price,
+      id,
+    };
+    console.log(product);
+
+    if (!carrinho[product.id]) {
+      carrinho[product.id] = { item: product, quantity: 1 };
+    } else {
+      carrinho[product.id].quantity += 1;
+    }
+
+    setItem('cart', carrinho);
+  };
+
   render() {
-    const { /* atributos, */ img, price, nome } = this.state;
+    const { /* atributos, */ img, price, nome, id } = this.state;
     return (
       <div>
         <p data-testid="product-detail-name">
@@ -43,6 +67,15 @@ class Detalhes extends Component {
         >
           Carrinho
         </Link>
+        <br />
+        <br />
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => this.addCart(nome, img, price, id) }
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
