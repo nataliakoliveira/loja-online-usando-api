@@ -45,10 +45,13 @@ class Home extends React.Component {
 
     if (!carrinho[product.id]) {
       carrinho[product.id] = { item: product, quantity: 1 };
+    } else {
+      carrinho[product.id].quantity += 1;
     }
     console.log(carrinho);
-    this.setState(() => ({
+    this.setState((prevState) => ({
       carrinho,
+      quant: prevState.quant + 1,
     }));
 
     setItem('cart', carrinho);

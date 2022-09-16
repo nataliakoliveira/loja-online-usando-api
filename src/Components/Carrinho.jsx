@@ -1,5 +1,5 @@
 import React from 'react';
-import { getItem } from '../services/api';
+import { getItem, setItem } from '../services/api';
 
 class Carrinho extends React.Component {
   state = {
@@ -12,6 +12,24 @@ class Carrinho extends React.Component {
       carrinho: produtos,
     });
   }
+
+  increaseValue = () => {
+    // fazer função aqui
+  };
+
+  decreaseValue = () => {
+    // fazer função aqui
+  };
+
+  // função para remover produto
+  removeProduct = (product) => {
+    const { carrinho } = this.state;
+    const obj = carrinho.filter((elem) => elem.id !== product.id);
+    this.setState({
+      carrinho: obj,
+    });
+    setItem('cart', carrinho);
+  };
 
   render() {
     const { carrinho } = this.state;
@@ -28,11 +46,41 @@ class Carrinho extends React.Component {
               </p>
               <img src={ item.thumbnail } alt={ item.title } />
               <p>
+                Preço:
                 { item.price}
               </p>
               <p data-testid="shopping-cart-product-quantity">
+                Quantidade:
                 {quantity}
               </p>
+
+              {/* //botao +++*/}
+
+              <button
+                type="button"
+                data-testid="product-increase-quantity"
+                onClick={ () => this.increaseValue(item) }
+              >
+                +
+              </button>
+
+              {/* //botao ---*/}
+              <button
+                type="button"
+                data-testid="product-decrease-quantity"
+                onClick={ () => this.decreaseValue(item) }
+              >
+                -
+              </button>
+
+              {/* //botao excluir */}
+              <button
+                type="button"
+                data-testid="remove-product"
+                onClick={ () => this.removeProduct(item) }
+              >
+                Excluir
+              </button>
             </div>
           )))}
       </div>
