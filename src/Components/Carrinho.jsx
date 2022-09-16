@@ -13,8 +13,15 @@ class Carrinho extends React.Component {
     });
   }
 
-  increaseValue = () => {
+  increaseValue = (product) => {
     // fazer função aqui
+    // fazer spread do obj
+    const { carrinho } = this.state;
+    const obj = { ...carrinho };
+    // acessar chave do produto
+    obj[product.id].quantity += 1;
+    // adicionar
+    // att localstorage e carrinho
   };
 
   decreaseValue = () => {
@@ -24,11 +31,12 @@ class Carrinho extends React.Component {
   // função para remover produto
   removeProduct = (product) => {
     const { carrinho } = this.state;
-    const obj = carrinho.filter((elem) => elem.id !== product.id);
+    const obj = { ...carrinho };
+    delete obj[product.id];
+    setItem('cart', obj);
     this.setState({
       carrinho: obj,
     });
-    setItem('cart', carrinho);
   };
 
   render() {
