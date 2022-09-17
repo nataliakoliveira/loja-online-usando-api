@@ -39,11 +39,11 @@ class Detalhes extends Component {
 
     if (!carrinho[product.id]) {
       carrinho[product.id] = { item: product, quantity: 1 };
-      this.setState({
-        carrinho,
-      });
-      setItem('cart', carrinho);
+    } else {
+      carrinho[product.id].quantity += 1;
     }
+
+    setItem('cart', carrinho);
   };
 
   render() {
