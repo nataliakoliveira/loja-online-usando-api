@@ -33,8 +33,11 @@ class Carrinho extends React.Component {
     const { carrinho } = this.state;
     const obj = { ...carrinho };
     const currencyQuantity = obj[product.id].quantity;
-    // acessar chave do produto
-    obj[product.id].quantity = currencyQuantity - 1;
+    if (currencyQuantity === 1) {
+      obj[product.id].quantity = 1;
+    } else if (currencyQuantity > 1) {
+      obj[product.id].quantity = currencyQuantity - 1;
+    }
     setItem('cart', obj);
     this.setState({
       carrinho: obj,
