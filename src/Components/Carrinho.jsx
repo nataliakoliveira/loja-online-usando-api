@@ -18,14 +18,27 @@ class Carrinho extends React.Component {
     // fazer spread do obj
     const { carrinho } = this.state;
     const obj = { ...carrinho };
+    const currencyQuantity = obj[product.id].quantity;
     // acessar chave do produto
-    obj[product.id].quantity += 1;
+    obj[product.id].quantity = currencyQuantity + 1;
+    setItem('cart', obj);
+    this.setState({
+      carrinho: obj,
+    });
     // adicionar
     // att localstorage e carrinho
   };
 
-  decreaseValue = () => {
-    // fazer função aqui
+  decreaseValue = (product) => {
+    const { carrinho } = this.state;
+    const obj = { ...carrinho };
+    const currencyQuantity = obj[product.id].quantity;
+    // acessar chave do produto
+    obj[product.id].quantity = currencyQuantity - 1;
+    setItem('cart', obj);
+    this.setState({
+      carrinho: obj,
+    });// fazer função aqui
   };
 
   // função para remover produto
@@ -57,8 +70,10 @@ class Carrinho extends React.Component {
                 Preço:
                 { item.price}
               </p>
-              <p data-testid="shopping-cart-product-quantity">
-                Quantidade:
+              <p
+                data-testid="shopping-cart-product-quantity"
+              >
+                { 'Quantidade: ' }
                 {quantity}
               </p>
 
