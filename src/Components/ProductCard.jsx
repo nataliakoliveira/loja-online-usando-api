@@ -7,13 +7,10 @@ class ProductCard extends Component {
     return (
       <div data-testid="product">
         <p>
-          Nome:
           { nomeProduto }
         </p>
-        Imagem:
         <img src={ img } alt={ nomeProduto } />
         <p>
-          Preço:
           { preco }
         </p>
       </div>

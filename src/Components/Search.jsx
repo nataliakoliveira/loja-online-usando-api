@@ -7,20 +7,24 @@ class Search extends React.Component {
     return (
 
       <div>
-        <input
-          type="text"
-          data-testid="query-input"
-          onChange={ (e) => handleChange(e) }
-          value={ nome }
-        />
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ () => handleClick() }
-        >
-          buscar
-        </button>
-        <h2 data-testid="home-initial-message">
+        <nav className="navHome">
+          <input
+            type="text"
+            data-testid="query-input"
+            onChange={ (e) => handleChange(e) }
+            value={ nome }
+            className="inputHome"
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ () => handleClick() }
+          >
+            buscar
+          </button>
+          <h1 className="titleHome1">FRONT-END ONLINE STORE</h1>
+        </nav>
+        <h2 data-testid="home-initial-message" className="titleHome2">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
       </div>

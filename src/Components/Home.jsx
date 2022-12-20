@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Categoria from './Categoria';
 import { getProductsFromCategoryAndQuery, setItem } from '../services/api';
 import Search from './Search';
+import '../Home.css';
 
 class Home extends React.Component {
   state = {

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from './ProductCard';
+import '../Home.css';
 
 class Categoria extends React.Component {
   state = {
@@ -32,10 +33,9 @@ class Categoria extends React.Component {
     const { categorias, resultados } = this.state;
     const { addCart } = this.props;
     return (
-      <div>
+      <div className="categoryLabel">
         {categorias !== 0 && categorias.map((elem) => (
           <label
-            className="category"
             key={ elem.id }
             htmlFor="category"
           >
@@ -46,6 +46,7 @@ class Categoria extends React.Component {
               onClick={ this.handleSelectRadio }
               type="button"
               value={ elem.name }
+              className="category"
             >
               {elem.name}
             </button>
@@ -55,6 +56,7 @@ class Categoria extends React.Component {
         {resultados.map((elem) => (
           <div
             key={ elem.id }
+            className="produto"
           >
             <ProductCard
               nomeProduto={ elem.title }

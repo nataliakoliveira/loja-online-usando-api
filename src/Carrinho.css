@@ -1,0 +1,23 @@
+/* stylelint-disable block-no-empty */
+body {
+  background-color: #ECECEC;
+}
+
+.title{
+  position: absolute;
+width: 329px;
+height: 68px;
+left: 746px;
+top: 395px;
+
+font-family: 'Epilogue';
+font-style: normal;
+font-weight: 600;
+font-size: 30px;
+line-height: 31px;
+text-align: center;
+letter-spacing: 0.055em;
+text-transform: uppercase;
+
+color: #313bc2;
+}

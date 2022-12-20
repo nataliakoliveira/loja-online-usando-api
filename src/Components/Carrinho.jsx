@@ -60,7 +60,13 @@ class Carrinho extends React.Component {
     return (
       <div>
         { Object.keys(carrinho).length === 0
-          ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          ? <p
+            data-testid="shopping-cart-empty-message"
+            className="title"
+          >
+            Seu carrinho está vazio
+
+          </p>
           : (Object.values(carrinho).map(({ item, quantity }) => (
             <div
               key={ item.id }
